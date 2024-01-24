@@ -41,4 +41,21 @@ wait_time = 0.2
 wait_time = 3.0
 one_shot = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.2, 1.2 )
+limit_left = 0
+limit_top = 0
+limit_right = 1800
+limit_bottom = 1200
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 3.0
+editor_draw_limits = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
