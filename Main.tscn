@@ -1,28 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 491, 285 )
-
-[node name="Panel" type="Panel" parent="."]
-margin_left = 78.0
-margin_top = 59.0
-margin_right = 196.0
-margin_bottom = 99.0
-
-[node name="Panel2" type="Panel" parent="."]
-margin_left = 1052.0
-margin_top = 376.0
-margin_right = 1170.0
-margin_bottom = 416.0
+position = Vector2( -1, 2 )
+speed = 100
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="Enemy" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 919, 485 )

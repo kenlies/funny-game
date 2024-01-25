@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/clowni2.png-729864f9d330691e9c41f95869218977.stex"
+path="res://.import/clown.png-f7fed768e56809f6bd4d7ef47b043b47.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://clowni2.png"
-dest_files=[ "res://.import/clowni2.png-729864f9d330691e9c41f95869218977.stex" ]
+source_file="res://clown.png"
+dest_files=[ "res://.import/clown.png-f7fed768e56809f6bd4d7ef47b043b47.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

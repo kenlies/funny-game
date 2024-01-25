@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/clowni1.png-863fca6174e0783b7ce326343ebd77d3.stex"
+path="res://.import/frog2.png-0a487e0991e59ced183522acbf646e45.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://clowni1.png"
-dest_files=[ "res://.import/clowni1.png-863fca6174e0783b7ce326343ebd77d3.stex" ]
+source_file="res://frog2.png"
+dest_files=[ "res://.import/frog2.png-0a487e0991e59ced183522acbf646e45.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
