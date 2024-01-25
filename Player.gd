@@ -6,8 +6,10 @@ var enemy_count = 0
 onready var _animated_sprite = $AnimatedSprite
 onready var _dashtimer = $DashTimer
 onready var _dashcooldowntimer = $DashCoolDownTimer
+onready var _jokecooldowntimer = $JokeCoolDownTimer
 var velocity = Vector2()
-var enemy = preload("res://Enemy.tscn")
+var enemy_frog = preload("res://EnemyFrog.tscn")
+var enemy_kid = preload("res://EnemyKid.tscn")
 onready var _spawntimer = $SpawnTimer
 onready var _camera = $Camera2D
 onready var _area = $Area2D
@@ -17,7 +19,8 @@ func get_input():
 	velocity = Vector2()
 
 	# handling stun
-	if Input.is_action_pressed("ui_joke"):
+	if Input.is_action_pressed("ui_joke") and _jokecooldowntimer.is_stopped():
+		_jokecooldowntimer.start()
 		for i in _area.get_overlapping_bodies():
 			if "Enemy" in i.name:
 				i.stunned = true
@@ -44,31 +47,37 @@ func get_input():
 		_animated_sprite.stop()
 	velocity = velocity.normalized() * speed
 
-func _on_DashTimer_timeout():
-	speed = 100
-
 # making the player move on every frame (if velocity is > 0)
 func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
+
+func _on_DashTimer_timeout():
+	speed = 100
 
 # spawn an enemy
 func _on_SpawnTimer_timeout():
 	if enemy_count < max_enemy_cout:
 		if player == null:
 			player = get_parent().get_node("Player")
-		var camera_center = _camera.get_camera_screen_center()
-		# below has a bug that it doesn't spawn directly up, down, left or right
-		var spawn_position = Vector2(choose_range(rand_range(camera_center.x - 200, camera_center.x - 100), rand_range(camera_center.x + 100, camera_center.x + 200)),
-									choose_range(rand_range(camera_center.y - 200, camera_center.y - 100), rand_range(camera_center.y + 100, camera_center.y + 200)))
-		
-		var enemy_instance = enemy.instance()
+		# camera center
+		var cam_cen = _camera.get_camera_screen_center()
+		# - calculates the spawn positions so that enemies spawn outside of camera view
+		# basically I take two vectors, the first one wil have the x coordinate limited, and free y cordinate
+		# the second will have y coordinate limited, and free x cordinate, then we just choose randomly with choose range
+		var spawn_position = rand_choose(Vector2(rand_choose(rand_range(cam_cen.x - 200, cam_cen.x - 190), 
+															rand_range(cam_cen.x + 190, cam_cen.x + 200)), 
+															rand_range(cam_cen.y - 200, cam_cen.y + 200)), 
+															Vector2(rand_range(cam_cen.x - 200, cam_cen.x + 200),
+															rand_choose(rand_range(cam_cen.y - 200, cam_cen.y - 190), 
+															rand_range(cam_cen.y + 190, cam_cen.y + 200))))
+		var enemy_instance = enemy_kid.instance()
+		enemy_instance.player = player
 		enemy_instance.position = spawn_position
 		get_parent().add_child(enemy_instance)
 		enemy_count += 1
 	
-func choose_range(val1, val2):
+func rand_choose(val1, val2):
 	if randf() < 0.5:
 		return val1
 	return val2
-

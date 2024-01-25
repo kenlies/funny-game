@@ -25,6 +25,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
+max_enemy_cout = 150
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/New Anim" = SubResource( 1 )
@@ -44,6 +45,10 @@ wait_time = 0.1
 wait_time = 3.0
 one_shot = true
 
+[node name="JokeCoolDownTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.6, 0.6 )
@@ -53,11 +58,10 @@ limit_right = 1500
 limit_bottom = 1000
 limit_smoothed = true
 smoothing_enabled = true
-smoothing_speed = 20.0
+smoothing_speed = 3.0
 editor_draw_limits = true
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 0.1
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]

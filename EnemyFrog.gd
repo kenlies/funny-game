@@ -3,7 +3,7 @@ extends KinematicBody2D
 var player
 var stunned = false
 var jump = false
-export var speed = 50
+export var speed = 55
 onready var _animated_sprite = $AnimatedSprite
 onready var _jump_timer = $JumpTimer
 onready var _stun_timer = $StunTimer
@@ -23,13 +23,7 @@ func _process(delta):
 			_animated_sprite.flip_h = true
 		# move the enemy towards the player times speed
 		move_and_slide(direction * speed)
-
-func _on_PlayerDetection_body_entered(body):
-	# player is initially null, set it to body when detected
-	if body.name == "Player":
-		player = body
 		
-
 
 func _on_JumpTimer_timeout():
 	if not jump:
