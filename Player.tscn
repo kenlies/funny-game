@@ -25,7 +25,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
-max_enemy_cout = 150
+max_enemy_cout = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 0 )
@@ -48,7 +48,6 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.6, 0.6 )
 limit_left = -1500
 limit_top = -1000
 limit_right = 1500
@@ -78,8 +77,15 @@ shape = SubResource( 6 )
 wait_time = 3.0
 one_shot = true
 
-[node name="DeathNote" parent="." instance=ExtResource( 2 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="DeathNote" parent="CanvasLayer" instance=ExtResource( 2 )]
 visible = false
+margin_left = 4.0
+margin_top = -5.0
+margin_right = 4.0
+margin_bottom = -5.0
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

@@ -11,11 +11,12 @@ onready var _camera = $Camera2D
 onready var _stun_area = $StunArea
 onready var _death_area = $DeathArea
 onready var _death_validity_timer = $DeathValidityTimer
-onready var _death_note = $DeathNote/Label
+onready var _death_note_label = $CanvasLayer/DeathNote/Label
 var velocity = Vector2()
 var enemy_frog = preload("res://EnemyFrog.tscn")
 var enemy_kid = preload("res://EnemyKid.tscn")
 var player = null
+var alive = true
 var enemy_count = 0
 var joke_count = 0
 
@@ -57,18 +58,20 @@ func get_input():
 
 # making the player move on every frame (if velocity is > 0) and checking if player died
 func _physics_process(delta):
-	get_input()
-	if len(_death_area.get_overlapping_bodies()) > 10 and _death_validity_timer.is_stopped():
-		print("timer start")
-		_death_validity_timer.start()
-	velocity = move_and_slide(velocity)
+	if alive:
+		get_input()
+		if len(_death_area.get_overlapping_bodies()) > 10 and _death_validity_timer.is_stopped():
+			print("timer start")
+			_death_validity_timer.start()
+		velocity = move_and_slide(velocity)
 
 # check if player actually died
 func _on_DeathValidityTimer_timeout():
 	if len(_death_area.get_overlapping_bodies()) > 10:
 		print("death")
-		_death_note.text = "You Died Bitch\nJokes told: " + str(joke_count)
-		$DeathNote.set_visible(true)
+		alive = false
+		_death_note_label.text = "You Died Bitch\nTime alive: " + str(Time.get_ticks_msec() / 1000) + "s\n" + "Jokes told: " + str(joke_count)
+		$CanvasLayer/DeathNote.set_visible(true)
 
 func _on_DashTimer_timeout():
 	speed = 100
@@ -81,12 +84,12 @@ func _on_SpawnTimer_timeout():
 		# - calculates the spawn positions so that enemies spawn outside of camera view
 		# basically I take two vectors, the first one wil have the x coordinate limited, and free y cordinate
 		# the second will have y coordinate limited, and free x cordinate, then we just choose randomly with choose range
-		var spawn_position = rand_choose(Vector2(rand_choose(rand_range(cam_cen.x - 200, cam_cen.x - 190), 
-															rand_range(cam_cen.x + 190, cam_cen.x + 200)), 
-															rand_range(cam_cen.y - 200, cam_cen.y + 200)), 
-															Vector2(rand_range(cam_cen.x - 200, cam_cen.x + 200),
-															rand_choose(rand_range(cam_cen.y - 200, cam_cen.y - 190), 
-															rand_range(cam_cen.y + 190, cam_cen.y + 200))))
+		var spawn_position = rand_choose(Vector2(rand_choose(rand_range(cam_cen.x - 360, cam_cen.x - 320), 
+															rand_range(cam_cen.x + 320, cam_cen.x + 360)), 
+															rand_range(cam_cen.y - 360, cam_cen.y + 360)), 
+															Vector2(rand_range(cam_cen.x - 360, cam_cen.x + 360),
+															rand_choose(rand_range(cam_cen.y - 360, cam_cen.y - 320), 
+															rand_range(cam_cen.y + 320, cam_cen.y + 360))))
 		var enemy_instance = enemy_frog.instance()
 		enemy_instance.player = player
 		enemy_instance.position = spawn_position

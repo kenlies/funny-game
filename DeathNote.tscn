@@ -16,9 +16,6 @@ margin_top = 34.0
 margin_right = 320.0
 margin_bottom = 82.0
 theme = SubResource( 1 )
-text = "You Died Bitch
-alive for: %s
-told jokes: %s"
 align = 1
 valign = 1
 __meta__ = {
