@@ -10,7 +10,7 @@ onready var _stun_timer = $StunTimer
 onready var _rigidbody2d = $RigidBody2D
 
 
-func _process(delta):
+func _physics_process(delta):
 	# if we are detected, start the chase
 	if stunned == true or jump:
 		return 
@@ -23,7 +23,6 @@ func _process(delta):
 			_animated_sprite.flip_h = true
 		# move the enemy towards the player times speed
 		move_and_slide(direction * speed)
-		
 
 func _on_JumpTimer_timeout():
 	if not jump:

@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://clown.png" type="Texture" id=1]
+[ext_resource path="res://DeathNote.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.gd" type="Script" id=3]
-
-[sub_resource type="Animation" id=1]
-resource_name = "New Anim"
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 7.5, 10 )
@@ -19,6 +17,8 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=4]
 
+[sub_resource type="CircleShape2D" id=6]
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 4, -5 )
 script = ExtResource( 3 )
@@ -26,9 +26,6 @@ __meta__ = {
 "_edit_group_": true
 }
 max_enemy_cout = 150
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/New Anim" = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 0 )
@@ -46,7 +43,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="JokeCoolDownTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -62,14 +59,29 @@ smoothing_speed = 3.0
 editor_draw_limits = true
 
 [node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 0.1
 autostart = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="StunArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2( 5, 5 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StunArea"]
+scale = Vector2( 8, 8 )
 shape = SubResource( 4 )
+
+[node name="DeathArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
+scale = Vector2( 3, 3 )
+shape = SubResource( 6 )
+
+[node name="DeathValidityTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DeathNote" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="StunArea" to="." method="_on_StunArea_body_entered"]
+[connection signal="timeout" from="DeathValidityTimer" to="." method="_on_DeathValidityTimer_timeout"]

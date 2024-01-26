@@ -1,18 +1,16 @@
 extends KinematicBody2D
 
-export var speed = 70
+onready var _stun_timer = $StunTimer
+onready var _hug_timer = $HugTimer
+var wants_to_hug = false
+export var speed = 80
+var stunned = false
 var velocity = Vector2.ZERO
-var player
+var player # set in player node
 var random_num
 var target
 
-enum {
-	SURROUND,
-	HUG,
-}
-
-var state = SURROUND
-
+# random number generation
 func _ready():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -20,24 +18,32 @@ func _ready():
 	
 
 func _physics_process(delta):
-	match state:
-		SURROUND:
-			move(get_circle_position(random_num), delta)
-		HUG:
-			move(player.global_position, delta)
+	if stunned == true:
+		return
+	if not wants_to_hug:
+		move(get_circle_position(random_num), delta)
+	else:
+		move(player.global_position, delta)
 
+# move the kid and add steering to make movement (?smoother?)
 func move(target, delta):
 	var direction = (target - global_position).normalized()
 	var desired_velocity = direction * speed
-	var steering = (desired_velocity - velocity) * delta * 2.5
+	var steering = (desired_velocity - velocity) * delta * 0.5
 	velocity += steering
 	velocity = move_and_slide(velocity)
 
+# get a random position in a circle around the player
 func get_circle_position(random):
 	var circle_center = player.global_position
-	var radius = 30
+	var radius = 80
 	var angle = random * PI * 2;
 	var x = circle_center.x + cos(angle) * radius;
 	var y = circle_center.y + sin(angle) * radius;
 	return Vector2(x, y)
 
+func _on_StunTimer_timeout():
+	stunned = false
+
+func _on_HugTimer_timeout():
+	wants_to_hug = true

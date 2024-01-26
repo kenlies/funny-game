@@ -25,5 +25,11 @@ shape = SubResource( 1 )
 frames = SubResource( 2 )
 
 [node name="HugTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [connection signal="timeout" from="HugTimer" to="." method="_on_HugTimer_timeout"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
