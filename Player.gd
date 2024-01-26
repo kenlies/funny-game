@@ -51,9 +51,10 @@ func get_input():
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1
 	if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down") or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
-		_animated_sprite.play("kurwa")
+		_animated_sprite.play("player_walk")
 	else:
 		_animated_sprite.stop()
+		_animated_sprite.frame = 0
 	velocity = velocity.normalized() * speed
 
 # making the player move on every frame (if velocity is > 0) and checking if player died
