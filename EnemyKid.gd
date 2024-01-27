@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+const HelperFuncs = preload("res://HelperFunctions.gd")
+var helper_funcs = HelperFuncs.new()
+
 onready var _stun_timer = $StunTimer
 onready var _hug_timer = $HugTimer
 var wants_to_hug = false
@@ -24,6 +27,7 @@ func _physics_process(delta):
 		move(get_circle_position(random_num), delta)
 	else:
 		move(player.global_position, delta)
+	helper_funcs.checkPositionOutOfView(self, player)
 
 # move the kid and add steering to make movement (?smoother?)
 func move(target, delta):

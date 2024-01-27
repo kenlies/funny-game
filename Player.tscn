@@ -28,7 +28,8 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
-max_enemy_cout = 300
+speed = 150
+max_enemy_count = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 0 )
@@ -61,7 +62,6 @@ smoothing_speed = 3.0
 editor_draw_limits = true
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 0.1
 autostart = true
 
 [node name="StunArea" type="Area2D" parent="."]

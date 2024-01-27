@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export var speed = 200
-export var max_enemy_cout = 100
+export var speed = 100
+export var max_enemy_count = 200
 onready var _animated_sprite = $AnimatedSprite
 onready var _dashtimer = $DashTimer
 onready var _dashcooldowntimer = $DashCoolDownTimer
@@ -18,7 +18,7 @@ var enemy_kid = preload("res://EnemyKid.tscn")
 var enemy_man = preload("res://EnemyMan.tscn")
 var player = null
 var alive = true
-var enemy_count = 0
+var enemy_count = 0 
 var joke_count = 0
 
 func _ready():
@@ -90,7 +90,7 @@ func _on_DashTimer_timeout():
 
 # spawn an enemy
 func _on_SpawnTimer_timeout():
-	if enemy_count < max_enemy_cout:
+	if enemy_count < max_enemy_count:
 		# camera center
 		var cam_cen = _camera.get_camera_screen_center()
 		# - calculates the spawn positions so that enemies spawn outside of camera view
@@ -102,7 +102,7 @@ func _on_SpawnTimer_timeout():
 															Vector2(rand_range(cam_cen.x - 360, cam_cen.x + 360),
 															rand_choose(rand_range(cam_cen.y - 360, cam_cen.y - 320), 
 															rand_range(cam_cen.y + 320, cam_cen.y + 360))))
-		var enemy_instance = enemy_man.instance()
+		var enemy_instance = enemy_frog.instance()
 		enemy_instance.player = player
 		enemy_instance.position = spawn_position
 		get_parent().add_child(enemy_instance)
