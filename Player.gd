@@ -42,7 +42,7 @@ func get_input():
 		_dashtimer.start()
 		speed = 500
 		_dashcooldowntimer.start()
-	
+
 	# moving the player and playing animations
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
@@ -61,6 +61,10 @@ func get_input():
 		_animated_sprite.frame = 0
 	velocity = velocity.normalized() * speed
 
+func get_endscr_input():
+	if Input.is_action_pressed("ui_accept"):
+		get_tree().change_scene("res://Main.tscn")
+
 # making the player move on every frame (if velocity is > 0) and checking if player died
 func _physics_process(delta):
 	if alive:
@@ -69,6 +73,8 @@ func _physics_process(delta):
 			print("timer start")
 			_death_validity_timer.start()
 		velocity = move_and_slide(velocity)
+	else:
+		get_endscr_input()
 
 # check if player actually died
 func _on_DeathValidityTimer_timeout():
@@ -81,7 +87,7 @@ func _on_DeathValidityTimer_timeout():
 func checkDeathConditions():
 	if ((len(_death_area.get_overlapping_bodies()) > 10 and _death_validity_timer.is_stopped()) or 
 			((player.position.x > 1490 or player.position.x < -1490 or player.position.y > 985 or player.position.y < -985) and 
-			len(_death_area.get_overlapping_bodies()) > 1 and _death_validity_timer.is_stopped())):
+			len(_death_area.get_overlapping_bodies()) > 8 and _death_validity_timer.is_stopped())):
 		return true
 	return false
 
@@ -102,7 +108,7 @@ func _on_SpawnTimer_timeout():
 															Vector2(rand_range(cam_cen.x - 360, cam_cen.x + 360),
 															rand_choose(rand_range(cam_cen.y - 360, cam_cen.y - 320), 
 															rand_range(cam_cen.y + 320, cam_cen.y + 360))))
-		var enemy_instance = enemy_frog.instance()
+		var enemy_instance = enemy_man.instance()
 		enemy_instance.player = player
 		enemy_instance.position = spawn_position
 		get_parent().add_child(enemy_instance)
