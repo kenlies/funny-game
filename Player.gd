@@ -15,6 +15,7 @@ onready var _death_note_label = $CanvasLayer/DeathNote/Label
 var velocity = Vector2()
 var enemy_frog = preload("res://EnemyFrog.tscn")
 var enemy_kid = preload("res://EnemyKid.tscn")
+var enemy_man = preload("res://EnemyMan.tscn")
 var player = null
 var alive = true
 var enemy_count = 0
@@ -44,8 +45,10 @@ func get_input():
 	# moving the player and playing animations
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
+		_animated_sprite.flip_h = false
 	if Input.is_action_pressed("ui_left"):
 		velocity.x -= 1
+		_animated_sprite.flip_h = true
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += 1
 	if Input.is_action_pressed("ui_up"):
@@ -61,18 +64,25 @@ func get_input():
 func _physics_process(delta):
 	if alive:
 		get_input()
-		if len(_death_area.get_overlapping_bodies()) > 10 and _death_validity_timer.is_stopped():
+		if checkDeathConditions():
 			print("timer start")
 			_death_validity_timer.start()
 		velocity = move_and_slide(velocity)
 
 # check if player actually died
 func _on_DeathValidityTimer_timeout():
-	if len(_death_area.get_overlapping_bodies()) > 10:
+	if checkDeathConditions():
 		print("death")
 		alive = false
 		_death_note_label.text = "You Died Bitch\nTime alive: " + str(Time.get_ticks_msec() / 1000) + "s\n" + "Jokes told: " + str(joke_count)
 		$CanvasLayer/DeathNote.set_visible(true)
+
+func checkDeathConditions():
+	if ((len(_death_area.get_overlapping_bodies()) > 10 and _death_validity_timer.is_stopped()) or 
+			((player.position.x > 1490 or player.position.x < -1490 or player.position.y > 985 or player.position.y < -985) and 
+			len(_death_area.get_overlapping_bodies()) > 1 and _death_validity_timer.is_stopped())):
+		return true
+	return false
 
 func _on_DashTimer_timeout():
 	speed = 100
@@ -91,7 +101,7 @@ func _on_SpawnTimer_timeout():
 															Vector2(rand_range(cam_cen.x - 360, cam_cen.x + 360),
 															rand_choose(rand_range(cam_cen.y - 360, cam_cen.y - 320), 
 															rand_range(cam_cen.y + 320, cam_cen.y + 360))))
-		var enemy_instance = enemy_frog.instance()
+		var enemy_instance = enemy_man.instance()
 		enemy_instance.player = player
 		enemy_instance.position = spawn_position
 		get_parent().add_child(enemy_instance)

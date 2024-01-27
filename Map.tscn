@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+noise = SubResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[node name="Map" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = SubResource( 2 )
+region_enabled = true
+region_rect = Rect2( -1500, -1000, 3000, 2000 )
+
+[node name="WestWall" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WestWall"]
+position = Vector2( -1510, 0 )
+scale = Vector2( 1, 100 )
+shape = SubResource( 3 )
+
+[node name="NorthWall" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NorthWall"]
+position = Vector2( 0, -1010 )
+scale = Vector2( 150, 1 )
+shape = SubResource( 3 )
+
+[node name="EastWall" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EastWall"]
+position = Vector2( 1510, 4.76837e-07 )
+scale = Vector2( 1, 100 )
+shape = SubResource( 3 )
+
+[node name="SouthWall" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SouthWall"]
+position = Vector2( 0, 1010 )
+scale = Vector2( 150, 1 )
+shape = SubResource( 3 )
