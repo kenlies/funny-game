@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const HelperFuncs = preload("res://HelperFunctions.gd")
-var helper_funcs = HelperFuncs.new()
+var h = HelperFuncs.new()
 
 var player # set in player node
 var stunned = false
@@ -17,6 +17,9 @@ func _physics_process(delta):
 		return 
 	if player:
 		var direction = (player.global_position - global_position).normalized()
+		if not player.alive:
+			direction.x *= -0.25
+			direction.y *= -0.25
 		# flip the sprite based on left or right direction on the x axis
 		if direction.x > 0:
 			_animated_sprite.flip_h = false
@@ -24,7 +27,7 @@ func _physics_process(delta):
 			_animated_sprite.flip_h = true
 		# move the enemy towards the player times speed
 		move_and_slide(direction * speed)
-	helper_funcs.checkPositionOutOfView(self, player)
+	h.checkPositionOutOfView(self, player)
 
 func _on_JumpTimer_timeout():
 	if not jump:

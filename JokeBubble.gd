@@ -15,7 +15,7 @@ var jokes = [
 "What do you call a bumblebee that is a log?\n- Lumberbee",
 "What do you call a bumblebee that mgdmmgdf mgmgd?\n- Mumblebee",
 "What do you call a hobbit that is not a hobbit?\n- Nobbit",
-"What do you call a hobbit that is overight?\n- Fabbit",
+"What do you call a hobbit that is overweight?\n- Fabbit",
 "What do you call a hobbit that is a thief?\n- Robbit",
 "What do you call game of ping-pong when it is a male genitalia?\n- Ding-dong",
 "What do you call water when it is a dad?\n- Fater",

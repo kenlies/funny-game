@@ -1,7 +1,10 @@
 extends KinematicBody2D
 
+const HelperFuncs = preload("res://HelperFunctions.gd")
+var h = HelperFuncs.new()
+
 export var speed = 100
-export var max_enemy_count = 200
+export var max_enemy_count = 500
 onready var _animated_sprite = $AnimatedSprite
 onready var _dashtimer = $DashTimer
 onready var _dashcooldowntimer = $DashCoolDownTimer
@@ -12,6 +15,7 @@ onready var _stun_area = $StunArea
 onready var _death_area = $DeathArea
 onready var _death_validity_timer = $DeathValidityTimer
 onready var _death_note_label = $CanvasLayer/DeathNote/Label
+onready var _enemies = get_parent().get_node("Enemies")
 var velocity = Vector2()
 var enemy_frog = preload("res://EnemyFrog.tscn")
 var enemy_kid = preload("res://EnemyKid.tscn")
@@ -20,6 +24,11 @@ var player = null
 var alive = true
 var enemy_count = 0 
 var joke_count = 0
+
+var spawnInterval = 0.025
+var currentSpawnTime = 0
+var bigCountDown = 2
+var currentBigTime = 0
 
 func _ready():
 	player = get_parent().get_node("Player")
@@ -65,8 +74,31 @@ func get_endscr_input():
 	if Input.is_action_pressed("ui_accept"):
 		get_tree().change_scene("res://Main.tscn")
 
+func spawnEnemy():
+	var enemy_instance = enemy_frog.instance()
+	enemy_instance.player = player
+	enemy_instance.position = h.getRandomSpawnPos(_camera.get_camera_screen_center())
+	_enemies.add_child(enemy_instance)
+
 # making the player move on every frame (if velocity is > 0) and checking if player died
 func _physics_process(delta):
+	
+	print(spawnInterval)
+	
+	currentSpawnTime += delta
+	currentBigTime += delta
+	
+	if currentSpawnTime >= spawnInterval and enemy_count < max_enemy_count:
+		spawnEnemy()
+		enemy_count += 1
+		currentSpawnTime = 0
+	if currentBigTime >= bigCountDown:
+		if spawnInterval > 0.05:
+			spawnInterval -= 0.025
+		currentBigTime = 0
+	
+	print(enemy_count)
+
 	if alive:
 		get_input()
 		if checkDeathConditions():
@@ -93,31 +125,6 @@ func checkDeathConditions():
 
 func _on_DashTimer_timeout():
 	speed = 100
-
-# spawn an enemy
-func _on_SpawnTimer_timeout():
-	if enemy_count < max_enemy_count:
-		# camera center
-		var cam_cen = _camera.get_camera_screen_center()
-		# - calculates the spawn positions so that enemies spawn outside of camera view
-		# basically I take two vectors, the first one wil have the x coordinate limited, and free y cordinate
-		# the second will have y coordinate limited, and free x cordinate, then we just choose randomly with choose range
-		var spawn_position = rand_choose(Vector2(rand_choose(rand_range(cam_cen.x - 360, cam_cen.x - 320), 
-															rand_range(cam_cen.x + 320, cam_cen.x + 360)), 
-															rand_range(cam_cen.y - 360, cam_cen.y + 360)), 
-															Vector2(rand_range(cam_cen.x - 360, cam_cen.x + 360),
-															rand_choose(rand_range(cam_cen.y - 360, cam_cen.y - 320), 
-															rand_range(cam_cen.y + 320, cam_cen.y + 360))))
-		var enemy_instance = enemy_man.instance()
-		enemy_instance.player = player
-		enemy_instance.position = spawn_position
-		get_parent().add_child(enemy_instance)
-		enemy_count += 1
-	
-func rand_choose(val1, val2):
-	if randf() < 0.5:
-		return val1
-	return val2
 
 func _on_StunArea_body_entered(body):
 	if "Kid" in body.name:

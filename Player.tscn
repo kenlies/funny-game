@@ -28,7 +28,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = 150
 max_enemy_count = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -61,10 +60,6 @@ smoothing_enabled = true
 smoothing_speed = 3.0
 editor_draw_limits = true
 
-[node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
-
 [node name="StunArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StunArea"]
@@ -94,6 +89,5 @@ margin_right = 4.0
 margin_bottom = -5.0
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="body_entered" from="StunArea" to="." method="_on_StunArea_body_entered"]
 [connection signal="timeout" from="DeathValidityTimer" to="." method="_on_DeathValidityTimer_timeout"]
