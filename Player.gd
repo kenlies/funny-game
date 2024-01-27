@@ -75,7 +75,7 @@ func get_endscr_input():
 		get_tree().change_scene("res://Main.tscn")
 
 func spawnEnemy():
-	var enemy_instance = enemy_frog.instance()
+	var enemy_instance = enemy_man.instance()
 	enemy_instance.player = player
 	enemy_instance.position = h.getRandomSpawnPos(_camera.get_camera_screen_center())
 	_enemies.add_child(enemy_instance)

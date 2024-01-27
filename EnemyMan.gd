@@ -9,12 +9,14 @@ var jump = false
 export var speed = 40
 onready var _animated_sprite = $AnimatedSprite
 onready var _stun_timer = $StunTimer
+var 	sprite_variant = randi() % 4
 
 func _physics_process(delta):
-	_animated_sprite.play("default")
 	if stunned == true or jump:
-		_animated_sprite.play("laugh")
-		return 
+		_animated_sprite.play("laugh" + str(sprite_variant))
+		return
+	else:
+		_animated_sprite.play("default" + str(sprite_variant))
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		if not player.alive:
