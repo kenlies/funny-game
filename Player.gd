@@ -33,6 +33,7 @@ var player = null
 var alive = true
 var enemy_count = 0 
 var joke_count = 0
+var laugh_count = 0
 
 var spawnInterval = 0.3
 var currentSpawnTime = 0
@@ -54,6 +55,7 @@ func get_input():
 		joke_count += 1
 		for i in _stun_area.get_overlapping_bodies():
 			if "Enemy" in i.name:
+				laugh_count += 1
 				i.stunned = true
 				i._stun_timer.start()
 
@@ -136,7 +138,7 @@ func _on_DeathValidityTimer_timeout():
 		_animated_sprite.stop()
 		_animated_sprite.frame = 0
 		$CanvasLayer/JokeBubble.hideJoke()
-		_death_note_label.text = "You Died Bitch\nTime alive: " + str(Time.get_ticks_msec() / 1000) + "s\n" + "Jokes told: " + str(joke_count)
+		_death_note_label.text = "You Died Bitch\nTime alive: " + str(Time.get_ticks_msec() / 1000) + "s\n" + "Jokes told: " + str(joke_count) + "\n" + "You made people laugh " + str(laugh_count) + " times"
 		$CanvasLayer/DeathNote.set_visible(true)
 
 func checkDeathConditions():
