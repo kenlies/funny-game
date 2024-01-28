@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://sprites/clown1.png" type="Texture" id=1]
 [ext_resource path="res://DeathNote.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://sprites/clown2.png" type="Texture" id=4]
 [ext_resource path="res://sprites/clown3.png" type="Texture" id=5]
 [ext_resource path="res://JokeBubble.tscn" type="PackedScene" id=6]
+[ext_resource path="res://drynrol.mp3" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 7.5, 10 )
@@ -86,6 +87,9 @@ margin_left = 4.0
 margin_top = -5.0
 margin_right = 4.0
 margin_bottom = -5.0
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="body_entered" from="StunArea" to="." method="_on_StunArea_body_entered"]

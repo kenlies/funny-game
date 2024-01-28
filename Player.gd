@@ -39,6 +39,7 @@ func get_input():
 	# handling stun
 	if Input.is_action_pressed("ui_joke") and _jokecooldowntimer.is_stopped():
 		$CanvasLayer/JokeBubble.displayJoke()
+		$SFXPlayer.play()
 		_jokecooldowntimer.start()
 		joke_count += 1
 		for i in _stun_area.get_overlapping_bodies():
