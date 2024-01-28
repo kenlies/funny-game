@@ -58,7 +58,9 @@ func get_input():
 	# handling dash and starting timers
 	if Input.is_action_pressed("ui_dash") and _dashcooldowntimer.is_stopped():
 		_dashtimer.start()
-		speed = 500
+		speed = 300
+		$CollisionShape2D.scale.x = 0.3
+		$CollisionShape2D.scale.y = 0.3
 		_dashcooldowntimer.start()
 
 	# moving the player and playing animations
@@ -72,7 +74,11 @@ func get_input():
 		velocity.y += 1
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1
-	if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down") or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
+
+	# set animated sprite
+	if not _dashtimer.is_stopped():
+		_animated_sprite.play("player_roll")
+	elif Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down") or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
 		_animated_sprite.play("player_walk")
 	else:
 		_animated_sprite.stop()
@@ -138,3 +144,5 @@ func checkDeathConditions():
 
 func _on_DashTimer_timeout():
 	speed = 100
+	$CollisionShape2D.scale.x = 1.0
+	$CollisionShape2D.scale.y = 1.0

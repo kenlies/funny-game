@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sprites/clown1.png" type="Texture" id=1]
 [ext_resource path="res://DeathNote.tscn" type="PackedScene" id=2]
@@ -7,12 +7,19 @@
 [ext_resource path="res://sprites/clown3.png" type="Texture" id=5]
 [ext_resource path="res://JokeBubble.tscn" type="PackedScene" id=6]
 [ext_resource path="res://drynrol.mp3" type="AudioStream" id=7]
+[ext_resource path="res://sprites/clown_rolll2.png" type="Texture" id=8]
+[ext_resource path="res://sprites/clown_rolll1.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 7.5, 10 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "player_roll",
+"speed": 15.0
+}, {
 "frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "player_walk",
@@ -39,7 +46,8 @@ frames = SubResource( 3 )
 animation = "player_walk"
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
+one_shot = true
 
 [node name="DashCoolDownTimer" type="Timer" parent="."]
 wait_time = 3.0
