@@ -5,14 +5,13 @@ var h = HelperFuncs.new()
 
 var player # set in player node
 var stunned = false
-var jump = false
 export var speed = 40
 onready var _animated_sprite = $AnimatedSprite
 onready var _stun_timer = $StunTimer
 var 	sprite_variant = randi() % 4
 
 func _physics_process(delta):
-	if stunned == true or jump:
+	if stunned == true:
 		_animated_sprite.play("laugh" + str(sprite_variant))
 		return
 	else:

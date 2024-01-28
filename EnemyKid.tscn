@@ -1,17 +1,67 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://EnemyKid.gd" type="Script" id=1]
-[ext_resource path="res://sprites/kid.png" type="Texture" id=2]
+[ext_resource path="res://sprites/kid1_1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/kid1_2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/kid1_laf2.png" type="Texture" id=4]
+[ext_resource path="res://sprites/kid1_laf1.png" type="Texture" id=5]
+[ext_resource path="res://sprites/kid3_2.png" type="Texture" id=6]
+[ext_resource path="res://sprites/kid2_1.png" type="Texture" id=7]
+[ext_resource path="res://sprites/kid4_laf2.png" type="Texture" id=8]
+[ext_resource path="res://sprites/kid3_laf1.png" type="Texture" id=9]
+[ext_resource path="res://sprites/kid2_2.png" type="Texture" id=10]
+[ext_resource path="res://sprites/kid3_laf2.png" type="Texture" id=11]
+[ext_resource path="res://sprites/kid2_laf2.png" type="Texture" id=12]
+[ext_resource path="res://sprites/kid3_1.png" type="Texture" id=13]
+[ext_resource path="res://sprites/kid2_laf1.png" type="Texture" id=14]
+[ext_resource path="res://sprites/kid4_1.png" type="Texture" id=15]
+[ext_resource path="res://sprites/kid4_2.png" type="Texture" id=16]
+[ext_resource path="res://sprites/kid4_laf1.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 7 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "default",
-"speed": 5.0
+"name": "default0",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "default1",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default2",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "default3",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "laugh0",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "laugh1",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "laugh2",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "laugh3",
+"speed": 9.0
 } ]
 
 [node name="EnemyKid" type="KinematicBody2D"]
@@ -23,13 +73,9 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-
-[node name="HugTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
+animation = "laugh3"
 
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 3.0
 
-[connection signal="timeout" from="HugTimer" to="." method="_on_HugTimer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
