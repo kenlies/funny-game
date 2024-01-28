@@ -21,7 +21,9 @@ var enemy_frog = preload("res://EnemyFrog.tscn")
 var enemy_kid = preload("res://EnemyKid.tscn")
 var enemy_man = preload("res://EnemyMan.tscn")
 var enemy_donut = preload("res://EnemyDonut.tscn")
+var enemy_shroom = preload("res://EnemyShroom.tscn")
 var enemy_list = [
+	enemy_shroom,
 	enemy_man,
 	enemy_kid,
 	enemy_frog,
