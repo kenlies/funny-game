@@ -38,5 +38,5 @@ func displayJoke():
 	$Panel/Label.text = jokes[randi() % len(jokes)]
 	$HideBubbleTimer.start()
 	
-func _on_HideBubbleTimer_timeout():
+func hideJoke():
 	$Panel.hide()

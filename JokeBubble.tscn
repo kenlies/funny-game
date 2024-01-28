@@ -55,4 +55,4 @@ autowrap = true
 wait_time = 7.0
 one_shot = true
 
-[connection signal="timeout" from="HideBubbleTimer" to="." method="_on_HideBubbleTimer_timeout"]
+[connection signal="timeout" from="HideBubbleTimer" to="." method="hideJoke"]

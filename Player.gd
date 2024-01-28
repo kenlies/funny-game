@@ -114,6 +114,7 @@ func _on_DeathValidityTimer_timeout():
 	if checkDeathConditions():
 		print("death")
 		alive = false
+		$CanvasLayer/JokeBubble.hideJoke()
 		_death_note_label.text = "You Died Bitch\nTime alive: " + str(Time.get_ticks_msec() / 1000) + "s\n" + "Jokes told: " + str(joke_count)
 		$CanvasLayer/DeathNote.set_visible(true)
 
