@@ -14,7 +14,7 @@ onready var _camera = $Camera2D
 onready var _stun_area = $StunArea
 onready var _death_area = $DeathArea
 onready var _death_validity_timer = $DeathValidityTimer
-onready var _death_note_label = $CanvasLayer/DeathNote/Label
+onready var _death_note_label = $CanvasLayer/DeathNote/Panel/Label
 onready var _enemies = get_parent().get_node("Enemies")
 var velocity = Vector2()
 var enemy_frog = preload("res://EnemyFrog.tscn")
@@ -136,7 +136,7 @@ func _on_DeathValidityTimer_timeout():
 		_animated_sprite.stop()
 		_animated_sprite.frame = 0
 		$CanvasLayer/JokeBubble.hideJoke()
-		_death_note_label.text = "You Died Bitch\nTime alive: " + str(Time.get_ticks_msec() / 1000) + "s\n" + "Jokes told: " + str(joke_count) + "\n" + "You made people laugh " + str(laugh_count) + " times"
+		_death_note_label.text = "You made people laugh " + str(laugh_count) + " times\n" + "Time: " + str(Time.get_ticks_msec() / 1000) + "s\n" + "Jokes told: " + str(joke_count)
 		$CanvasLayer/DeathNote.set_visible(true)
 
 func checkDeathConditions():

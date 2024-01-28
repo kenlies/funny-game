@@ -91,10 +91,6 @@ layer = 0
 
 [node name="DeathNote" parent="CanvasLayer" instance=ExtResource( 2 )]
 visible = false
-margin_left = 4.0
-margin_top = -5.0
-margin_right = 4.0
-margin_bottom = -5.0
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
