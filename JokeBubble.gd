@@ -19,7 +19,14 @@ var jokes = [
 "What do you call a hobbit that is a thief?\n- Robbit",
 "What do you call game of ping-pong when it is a male genitalia?\n- Ding-dong",
 "What do you call water when it is a dad?\n- Fater",
-"What is a game developer's favorite soda drink?\n- Sprite"
+"What is a game developer's favorite soda drink?\n- Sprite",
+"What do you call a koala when it is a snake?\n- Boala",
+"What do you call a tapiir when it is a multiplayer online battle arena game?\n- DotApiir",
+"What do you call an elephant that has an x86 architechture central proceccssing unit?\n- Intelephant",
+"What do you call a mouse that is taking a break?\n- A pause",
+"What do you call a window that came in second?\n- Losedow",
+"What do you call a door that has no money?\n- A poor",
+"What does the atmosphere use for its hair?\n- Air conditioner"
 ]
 
 func _ready():
