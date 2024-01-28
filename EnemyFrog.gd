@@ -13,8 +13,11 @@ onready var _stun_timer = $StunTimer
 
 
 func _physics_process(delta):
-	if stunned == true or jump:
+	if jump:
 		return 
+	if stunned == true:
+		_animated_sprite.play("laugh")
+		return
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		if not player.alive:
@@ -40,4 +43,6 @@ func _on_JumpTimer_timeout():
 
 func _on_StunTimer_timeout():
 	stunned = false
+	_animated_sprite.stop()
+	_animated_sprite.animation = "default"
 
