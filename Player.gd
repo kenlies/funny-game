@@ -20,15 +20,23 @@ var velocity = Vector2()
 var enemy_frog = preload("res://EnemyFrog.tscn")
 var enemy_kid = preload("res://EnemyKid.tscn")
 var enemy_man = preload("res://EnemyMan.tscn")
+var enemy_donut = preload("res://EnemyDonut.tscn")
+var enemy_list = [
+	enemy_man,
+	enemy_kid,
+	enemy_frog,
+	enemy_donut
+]
 var player = null
 var alive = true
 var enemy_count = 0 
 var joke_count = 0
 
-var spawnInterval = 0.025
+var spawnInterval = 0.3
 var currentSpawnTime = 0
-var bigCountDown = 2
+var bigCountDown = 15
 var currentBigTime = 0
+var currentEnemyMod = 1
 
 func _ready():
 	player = get_parent().get_node("Player")
@@ -76,12 +84,13 @@ func get_endscr_input():
 		get_tree().change_scene("res://Main.tscn")
 
 func spawnEnemy():
-	var enemy_instance = enemy_kid.instance()
+	randomize()
+	var enemy_instance = (enemy_list[randi() % currentEnemyMod]).instance()
 	enemy_instance.player = player
 	enemy_instance.position = h.getRandomSpawnPos(_camera.get_camera_screen_center())
 	_enemies.add_child(enemy_instance)
 
-# making the player move on every frame (if velocity is > 0) and checking if player died
+# making the player move on every frame, checking if player died & spawning enemies
 func _physics_process(delta):
 	
 	print(spawnInterval)
@@ -89,12 +98,14 @@ func _physics_process(delta):
 	currentSpawnTime += delta
 	currentBigTime += delta
 	
-	if currentSpawnTime >= spawnInterval and enemy_count < max_enemy_count:
+	if currentSpawnTime >= spawnInterval:
 		spawnEnemy()
 		enemy_count += 1
 		currentSpawnTime = 0
 	if currentBigTime >= bigCountDown:
-		if spawnInterval > 0.05:
+		if spawnInterval >= 0.075:
+			if (currentEnemyMod < enemy_list.size()):
+				currentEnemyMod += 1
 			spawnInterval -= 0.025
 		currentBigTime = 0
 	

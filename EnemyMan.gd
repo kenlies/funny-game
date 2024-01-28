@@ -19,8 +19,8 @@ func _physics_process(delta):
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		if not player.alive:
-			direction.x *= -0.25
-			direction.y *= -0.25
+			direction.x *= -0.05
+			direction.y *= -0.05
 		# flip the sprite based on left or right direction on the x axis
 		if direction.x > 0:
 			_animated_sprite.flip_h = false
