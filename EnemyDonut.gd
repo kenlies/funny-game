@@ -9,13 +9,14 @@ var jump = false
 export var speed = 30
 onready var _animated_sprite = $AnimatedSprite
 onready var _stun_timer = $StunTimer
+var 	sprite_variant = randi() % 2 #change according to how many variants of donut
 
 func _physics_process(delta):
 	if stunned == true or jump:
-		_animated_sprite.play("laugh")
+		_animated_sprite.play("laugh" + str(sprite_variant))
 		return
 	else:
-		_animated_sprite.play("default")
+		_animated_sprite.play("default" + str(sprite_variant))
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		if not player.alive:
