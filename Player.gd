@@ -24,10 +24,10 @@ var enemy_donut = preload("res://EnemyDonut.tscn")
 var enemy_shroom = preload("res://EnemyShroom.tscn")
 var enemy_ball = preload("res://EnemyBall.tscn")
 var enemy_list = [
-	enemy_donut,
 	enemy_man,
 	enemy_kid,
 	enemy_frog,
+	enemy_donut,
 	enemy_shroom,
 	enemy_ball
 ]

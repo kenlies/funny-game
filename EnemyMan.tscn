@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://sprites/man1_laf2.png" type="Texture" id=1]
 [ext_resource path="res://EnemyMan.gd" type="Script" id=2]
@@ -17,9 +17,73 @@
 [ext_resource path="res://sprites/man3_2.png" type="Texture" id=15]
 [ext_resource path="res://sprites/man3_laf1.png" type="Texture" id=16]
 [ext_resource path="res://sprites/man3_laf2.png" type="Texture" id=17]
+[ext_resource path="res://sprites/woman1_1.png" type="Texture" id=18]
+[ext_resource path="res://sprites/woman1_2.png" type="Texture" id=19]
+[ext_resource path="res://sprites/woman1_laf1.png" type="Texture" id=20]
+[ext_resource path="res://sprites/woman1_laf2.png" type="Texture" id=21]
+[ext_resource path="res://sprites/woman2_1.png" type="Texture" id=22]
+[ext_resource path="res://sprites/woman2_2.png" type="Texture" id=23]
+[ext_resource path="res://sprites/woman2_laf2.png" type="Texture" id=24]
+[ext_resource path="res://sprites/woman2_laf1.png" type="Texture" id=25]
+[ext_resource path="res://sprites/woman3_laf2.png" type="Texture" id=26]
+[ext_resource path="res://sprites/woman3_laf1.png" type="Texture" id=27]
+[ext_resource path="res://sprites/woman3_2.png" type="Texture" id=28]
+[ext_resource path="res://sprites/woman3_1.png" type="Texture" id=29]
+[ext_resource path="res://sprites/woman4_2.png" type="Texture" id=30]
+[ext_resource path="res://sprites/woman4_laf1.png" type="Texture" id=31]
+[ext_resource path="res://sprites/woman4_laf2.png" type="Texture" id=32]
+[ext_resource path="res://sprites/woman4_1.png" type="Texture" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 10 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 22 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 23 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 29 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 28 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 33 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 30 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 25 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 27 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 26 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 31 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 32 )
+region = Rect2( 0, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -43,6 +107,26 @@ animations = [ {
 "name": "default3",
 "speed": 8.0
 }, {
+"frames": [ ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "default4",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default5",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "default6",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "default7",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 3 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "laugh0",
@@ -62,6 +146,26 @@ animations = [ {
 "loop": true,
 "name": "laugh3",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "laugh4",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "laugh5",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "laugh6",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "laugh7",
+"speed": 5.0
 } ]
 
 [node name="EnemyMan" type="KinematicBody2D"]
@@ -72,7 +176,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "laugh3"
+animation = "laugh7"
 
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 3.0
