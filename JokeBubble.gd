@@ -10,7 +10,7 @@ var jokes = [
 "What do you call a seagull who's a girl?\n- Shegull",
 "How do you make cupcakes?\n- First you make cake and then put it in a cup!",
 "What do you call a bumblebee that is a exercise equipment?\n- Dumbellbee",
-"What do you call a bumblebee that is seeping?\n- Slumberbee",
+"What do you call a bumblebee that is sleeping?\n- Slumberbee",
 "What do you call a bumblebee that is a rabbit character from Disney motion picture \"Bambi\"?\n- Thumperbee",
 "What do you call a bumblebee that is a log?\n- Lumberbee",
 "What do you call a bumblebee that mgdmmgdf mgmgd?\n- Mumblebee",

@@ -10,8 +10,12 @@ config_version=4
 
 [application]
 
-config/name="ClownGame"
+config/name="Funny The Clown's Funny Adventure 3: Funny The Clown's Funny Day In The Funny Park - Funny edition"
+config/description="Clown yourself out of mess"
 run/main_scene="res://Main.tscn"
+boot_splash/show_image=false
+boot_splash/image="res://sprites/bg.png"
+config/icon="res://sprites/clown.png"
 
 [display]
 
@@ -20,6 +24,7 @@ window/size/height=360
 window/size/resizable=false
 window/size/test_width=1280
 window/size/test_height=720
+mouse_cursor/custom_image="res://sprites/hand.png"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
