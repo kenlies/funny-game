@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/drynrol.mp3-b75970fe8c5fc867069528c6c2843b8c.mp3str"
+
+[deps]
+
+source_file="res://drynrol.mp3"
+dest_files=[ "res://.import/drynrol.mp3-b75970fe8c5fc867069528c6c2843b8c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
