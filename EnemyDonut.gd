@@ -9,7 +9,9 @@ var jump = false
 export var speed = 30
 onready var _animated_sprite = $AnimatedSprite
 onready var _stun_timer = $StunTimer
-var 	sprite_variant = randi() % 2 #change according to how many variants of donut
+
+onready var sprite_variants_count = _animated_sprite.frames.get_animation_names().size() / 2
+onready var 	sprite_variant = randi() % sprite_variants_count
 
 func _physics_process(delta):
 	if stunned == true or jump:

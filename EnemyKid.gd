@@ -8,7 +8,9 @@ var stunned = false
 export var speed = 60
 onready var _animated_sprite = $AnimatedSprite
 onready var _stun_timer = $StunTimer
-var 	sprite_variant = randi() % 4
+
+onready var sprite_variants_count = _animated_sprite.frames.get_animation_names().size() / 2
+onready var 	sprite_variant = randi() % sprite_variants_count
 
 func _physics_process(delta):
 	if stunned == true:
