@@ -27,7 +27,8 @@ var jokes = [
 "What do you call a door that has no money?\n- A poor",
 "What does the atmosphere use for its hair?\n- Air conditioner",
 "What do you call an octopus that is a doctor?\n- Doctopus",
-"What do you call an octopus that is suspicious?\n- Octosus"
+"What do you call an octopus that is suspicious?\n- Octosus",
+"What do you call a horse, when it is a method used in telecommunication to encode text characters as standardized sequences of two different signal durations?\n- Morse"
 ]
 
 func _ready():
