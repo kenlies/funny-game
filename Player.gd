@@ -32,6 +32,7 @@ var enemy_list = [
 	enemy_ball
 ]
 var player = null
+var joke_bubble = null
 var alive = true
 var enemy_count = 0 
 var joke_count = 0
@@ -45,13 +46,14 @@ var currentEnemyMod = 1
 
 func _ready():
 	player = get_parent().get_node("Player")
+	joke_bubble = get_parent().get_node("JokeBubble")
 
 func get_input():
 	velocity = Vector2()
 
 	# handling stun
 	if Input.is_action_pressed("ui_joke") and _jokecooldowntimer.is_stopped():
-		$CanvasLayer/JokeBubble.displayJoke()
+		joke_bubble.displayJoke()
 		$SFXPlayer.play()
 		_jokecooldowntimer.start()
 		joke_count += 1
@@ -135,7 +137,7 @@ func _on_DeathValidityTimer_timeout():
 		alive = false
 		_animated_sprite.stop()
 		_animated_sprite.frame = 0
-		$CanvasLayer/JokeBubble.hideJoke()
+		joke_bubble.hideJoke()
 		_death_note_label.text = "You made people laugh " + str(laugh_count) + " times\n" + "Time: " + str(Time.get_ticks_msec() / 1000) + "s\n" + "Jokes told: " + str(joke_count)
 		$CanvasLayer/DeathNote.set_visible(true)
 
