@@ -40,6 +40,7 @@ func displayJoke():
 	randomize()
 	bubblePosition()
 	$Panel.show()
+	$AnimationPlayer.play("JokeBubblePopup")
 	$Panel/Label.text = jokes[randi() % len(jokes)]
 	$HideBubbleTimer.start()
 	
@@ -50,15 +51,20 @@ func bubblePosition():
 	var bubble_side_padding = 10 #space between the bubble and screen edge
 	var panel_middle = $Panel.rect_size.x / 2
 
+	$Panel.rect_pivot_offset.x = panel_middle
 	rect_position.x = player.position.x - panel_middle
 	if (player.position.x < -1500 + panel_middle + bubble_side_padding):
 		rect_position.x += (panel_middle - (player.position.x + 1500) + bubble_side_padding)
+		$Panel.rect_pivot_offset.x = (player.position.x + 1500)
 	elif (player.position.x > 1500 - panel_middle - bubble_side_padding):
 		rect_position.x -= (panel_middle + (player.position.x - 1500) + bubble_side_padding)
+		$Panel.rect_pivot_offset.x = $Panel.rect_size.x + (player.position.x - 1500)
 
 	if (player.position.y > -820):
 		rect_position.y = player.position.y - 60
 		$Panel.grow_vertical = 0
+		$Panel.rect_pivot_offset.y = 60
 	else:
 		rect_position.y = player.position.y + 20
 		$Panel.grow_vertical = 1
+		$Panel.rect_pivot_offset.y = -20
