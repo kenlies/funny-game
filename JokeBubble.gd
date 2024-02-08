@@ -37,7 +37,6 @@ func _ready():
 	$Panel.hide()
 
 func displayJoke():
-	randomize()
 	bubblePosition()
 	$Panel.show()
 	$AnimationPlayer.play("JokeBubblePopup")

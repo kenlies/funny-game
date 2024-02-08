@@ -99,7 +99,6 @@ func get_endscr_input():
 		get_tree().change_scene("res://Main.tscn")
 
 func spawnEnemy():
-	randomize()
 	var enemy_instance = (enemy_list[randi() % int(currentEnemyMod)]).instance()
 	enemy_instance.player = player
 	enemy_instance.position = h.getRandomSpawnPos(_camera.get_camera_screen_center())
