@@ -67,8 +67,9 @@ func get_input():
 	if Input.is_action_pressed("ui_dash") and _dashcooldowntimer.is_stopped():
 		_dashtimer.start()
 		speed = 300
-		$CollisionShape2D.scale.x = 0.3
-		$CollisionShape2D.scale.y = 0.3
+		$CollisionShape2D.shape.extents.x = 5
+		$CollisionShape2D.shape.extents.y = 5
+		$CollisionShape2D.position.y = 4
 		_dashcooldowntimer.start()
 
 	# moving the player and playing animations
@@ -150,5 +151,6 @@ func checkDeathConditions():
 
 func _on_DashTimer_timeout():
 	speed = 100
-	$CollisionShape2D.scale.x = 1.0
-	$CollisionShape2D.scale.y = 1.0
+	$CollisionShape2D.shape.extents.x = 7.5
+	$CollisionShape2D.shape.extents.y = 10
+	$CollisionShape2D.position.y = 0
