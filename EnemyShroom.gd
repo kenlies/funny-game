@@ -5,6 +5,7 @@ var h = HelperFuncs.new()
 
 var player # set in player node
 var stunned = false
+var wait = false
 var jump = false
 export var speed = 85
 onready var _animated_sprite = $AnimatedSprite
@@ -15,6 +16,8 @@ onready var _stun_timer = $StunTimer
 func _physics_process(delta):
 	if jump:
 		return 
+	if wait == true:
+		return
 	if stunned == true:
 		_animated_sprite.play("laugh")
 		return
@@ -30,7 +33,12 @@ func _physics_process(delta):
 			_animated_sprite.flip_h = true
 		# move the enemy towards the player times speed
 		move_and_slide(direction * speed)
+		if (get_slide_count() >= 4):
+			wait = true
+			$WaitTimer.start(rand_range(0.3, 1.2))		
+
 	h.checkPositionOutOfView(self, player)
+
 
 func _on_JumpTimer_timeout():
 	if not jump:
@@ -46,3 +54,5 @@ func _on_StunTimer_timeout():
 	_animated_sprite.stop()
 	_animated_sprite.animation = "default"
 
+func _on_WaitTimer_timeout():
+	wait = false

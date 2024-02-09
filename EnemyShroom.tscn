@@ -40,5 +40,8 @@ wait_time = 3.0
 wait_time = 0.35
 autostart = true
 
+[node name="WaitTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]

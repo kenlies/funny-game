@@ -181,5 +181,8 @@ animation = "laugh7"
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="WaitTimer" type="Timer" parent="."]
+
 [connection signal="ready" from="." to="." method="_ready"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]
