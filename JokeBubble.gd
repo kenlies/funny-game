@@ -28,7 +28,11 @@ var jokes = [
 "What does the atmosphere use for its hair?\n- Air conditioner",
 "What do you call an octopus that is a doctor?\n- Doctopus",
 "What do you call an octopus that is suspicious?\n- Octosus",
-"What do you call a horse, when it is a method used in telecommunication to encode text characters as standardized sequences of two different signal durations?\n- Morse"
+"What do you call a horse, when it is a method used in telecommunication to encode text characters as standardized sequences of two different signal durations?\n- Morse",
+"What do you call a horse in Norway?\n- Norse",
+"What do you call a russian octopus?\n- Octorus",
+"What is squids' favourite sport?\n- Squash",
+"Where do you get help for eye related problems in Europe?\n- Eurovision"
 ]
 
 onready var player = get_parent().get_node("Player")
