@@ -32,15 +32,23 @@ var jokes = [
 ]
 
 onready var player = get_parent().get_node("Player")
+var joke_index = 0
 
 func _ready():
+	# I don't understand why this needs to be called to shuffle with random seed every time program is run. The randomize() in Main.gd seems to be randomizing only locally??
+	# - try removing randomize() below and see that that the same jokes appear in order each time program is run.
+	randomize()
+	jokes.shuffle()
 	$Panel.hide()
 
 func displayJoke():
 	bubblePosition()
 	$Panel.show()
 	$AnimationPlayer.play("JokeBubblePopup")
-	$Panel/Label.text = jokes[randi() % len(jokes)]
+	if joke_index == len(jokes):
+		joke_index = 0
+	$Panel/Label.text = jokes[joke_index]
+	joke_index += 1
 	$HideBubbleTimer.start()
 	
 func hideJoke():
