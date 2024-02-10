@@ -38,11 +38,12 @@ var enemy_count = 0
 var joke_count = 0
 var laugh_count = 0
 
-var spawnInterval = 0.3
-var currentSpawnTime = 0
-var bigCountDown = 14
-var currentBigTime = 0
-var currentEnemyMod = 1
+# five variables below used for spawning diff enemies progressively
+var spawnInterval = 0.3 # starting spawnInterval
+var currentSpawnTime = 0 # variable we add delta to
+var bigCountDown = 14 # time between each new mob is introduced
+var currentBigTime = 0 # variable we add delta to
+var currentEnemyMod = 1 # keep track of stages in enemy_list
 
 func _ready():
 	player = get_parent().get_node("Player")
@@ -104,27 +105,29 @@ func spawnEnemy():
 	enemy_instance.position = h.getRandomSpawnPos(_camera.get_camera_screen_center())
 	_enemies.add_child(enemy_instance)
 
+func enemySpawnProgression(delta):
+	print(spawnInterval) # remove
+	currentSpawnTime += delta
+	currentBigTime += delta
+	if currentSpawnTime >= spawnInterval:
+		spawnEnemy()
+		enemy_count += 1
+		currentSpawnTime = 0
+	if currentBigTime >= bigCountDown:
+		if spawnInterval >= 0.075:
+			if (currentEnemyMod < enemy_list.size()):
+				currentEnemyMod += 0.7
+			spawnInterval -= 0.025
+		currentBigTime = 0
+
 # making the player move on every frame, checking if player died & spawning enemies
 func _physics_process(delta):
-	print(enemy_count)
-
+	print(enemy_count) # remove 
 	if alive:
-		print(spawnInterval)
-		currentSpawnTime += delta
-		currentBigTime += delta
-		if currentSpawnTime >= spawnInterval:
-			spawnEnemy()
-			enemy_count += 1
-			currentSpawnTime = 0
-		if currentBigTime >= bigCountDown:
-			if spawnInterval >= 0.075:
-				if (currentEnemyMod < enemy_list.size()):
-					currentEnemyMod += 0.7
-				spawnInterval -= 0.025
-			currentBigTime = 0
+		enemySpawnProgression(delta)
 		get_input()
 		if checkDeathConditions():
-			print("timer start")
+			print("timer start") # remove
 			_death_validity_timer.start()
 		velocity = move_and_slide(velocity)
 	else:
