@@ -22,8 +22,6 @@ func _physics_process(_delta):
 	else:
 		_animated_sprite.play("default" + str(sprite_variant))
 	if player:
-		if (get_slide_count() >= 4):
-			yield(get_tree().create_timer(rand_range(0.3, 1.2)), "timeout")
 		var direction = (player.global_position - global_position).normalized()
 		if not player.alive:
 			direction.x *= -0.05
