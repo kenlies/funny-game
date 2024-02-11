@@ -10,7 +10,7 @@ export var speed = 60
 onready var _animated_sprite = $AnimatedSprite
 onready var _stun_timer = $StunTimer
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if wait == true:
 		return
 	if stunned == true:

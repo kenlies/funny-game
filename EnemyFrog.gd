@@ -13,7 +13,7 @@ onready var _jump_timer = $JumpTimer
 onready var _stun_timer = $StunTimer
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if jump:
 		return 
 	if wait == true:

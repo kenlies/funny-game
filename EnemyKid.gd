@@ -13,7 +13,7 @@ onready var _stun_timer = $StunTimer
 onready var sprite_variants_count = _animated_sprite.frames.get_animation_names().size() / 2
 onready var 	sprite_variant = randi() % sprite_variants_count
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if wait == true:
 		return
 	if stunned == true:

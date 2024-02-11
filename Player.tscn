@@ -91,5 +91,4 @@ visible = false
 stream = ExtResource( 7 )
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
-[connection signal="body_entered" from="StunArea" to="." method="_on_StunArea_body_entered"]
 [connection signal="timeout" from="DeathValidityTimer" to="." method="_on_DeathValidityTimer_timeout"]

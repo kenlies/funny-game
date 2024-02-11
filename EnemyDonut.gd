@@ -14,7 +14,7 @@ onready var _stun_timer = $StunTimer
 onready var sprite_variants_count = _animated_sprite.frames.get_animation_names().size() / 2
 onready var 	sprite_variant = randi() % sprite_variants_count
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if wait == true:
 		return
 	if stunned == true or jump:
@@ -36,7 +36,7 @@ func _physics_process(delta):
 		move_and_slide(direction * speed)
 		if (get_slide_count() >= 4):
 			wait = true
-			$WaitTimer.start(rand_range(0.3, 1.2))		
+			$WaitTimer.start(rand_range(0.3, 1.2))
 
 	# destroy enemy if its too far away from the view
 	h.checkPositionOutOfView(self, player)

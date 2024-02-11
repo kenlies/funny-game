@@ -9,7 +9,6 @@ onready var _animated_sprite = $AnimatedSprite
 onready var _dashtimer = $DashTimer
 onready var _dashcooldowntimer = $DashCoolDownTimer
 onready var _jokecooldowntimer = $JokeCoolDownTimer
-onready var _spawntimer = $SpawnTimer
 onready var _camera = $Camera2D
 onready var _stun_area = $StunArea
 onready var _death_area = $DeathArea
