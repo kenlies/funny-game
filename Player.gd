@@ -44,6 +44,9 @@ var bigCountDown = 14 # time between each new mob is introduced
 var currentBigTime = 0 # variable we add delta to
 var currentEnemyMod = 1 # keep track of stages in enemy_list
 
+var debug_enemy = false
+var debug_player = false
+
 func _ready():
 	player = get_parent().get_node("Player")
 	joke_bubble = get_parent().get_node("JokeBubble")
@@ -105,7 +108,8 @@ func spawnEnemy():
 	_enemies.add_child(enemy_instance)
 
 func enemySpawnProgression(delta):
-	print(spawnInterval) # remove
+	if debug_enemy:
+		print(spawnInterval)
 	currentSpawnTime += delta
 	currentBigTime += delta
 	if currentSpawnTime >= spawnInterval:
@@ -121,12 +125,14 @@ func enemySpawnProgression(delta):
 
 # making the player move on every frame, checking if player died & spawning enemies
 func _physics_process(delta):
-	print(enemy_count) # remove 
+	if debug_enemy:
+		print(enemy_count)
 	if alive:
 		enemySpawnProgression(delta)
 		get_input()
 		if checkDeathConditions():
-			print("timer start") # remove
+			if debug_player:
+				print("timer start")
 			_death_validity_timer.start()
 		velocity = move_and_slide(velocity)
 	else:
@@ -135,7 +141,8 @@ func _physics_process(delta):
 # check if player actually died
 func _on_DeathValidityTimer_timeout():
 	if checkDeathConditions():
-		print("death")
+		if debug_player:
+			print("death")
 		alive = false
 		_animated_sprite.stop()
 		_animated_sprite.frame = 0
