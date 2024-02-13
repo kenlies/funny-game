@@ -35,7 +35,7 @@ func _physics_process(_delta):
 		move_and_slide(direction * speed)
 		if (get_slide_count() >= 4):
 			wait = true
-			$WaitTimer.start(rand_range(0.3, 1.2))
+			$WaitTimer.start(rand_range(0.3, 0.8))
 
 	# destroy enemy if its too far away from the view
 	h.checkPositionOutOfView(self, player)
