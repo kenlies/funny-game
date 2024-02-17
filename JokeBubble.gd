@@ -48,6 +48,7 @@ func _ready():
 func displayJoke():
 	bubblePosition()
 	$Panel.show()
+
 	$AnimationPlayer.play("JokeBubblePopup")
 	if joke_index == len(jokes):
 		joke_index = 0
@@ -56,7 +57,8 @@ func displayJoke():
 	$HideBubbleTimer.start()
 	
 func hideJoke():
-	$Panel.hide()
+	$AnimationPlayer.play("JokeBubbleOut")
+	#$Panel.hide()
 
 func bubblePosition():
 	var bubble_side_padding = 10 #space between the bubble and screen edge
