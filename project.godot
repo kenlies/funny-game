@@ -88,6 +88,7 @@ ui_dash={
 
 [physics]
 
+common/physics_fps=71
 common/enable_pause_aware_picking=true
 
 [rendering]
